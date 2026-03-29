@@ -12,7 +12,7 @@
         /* --- CSS: Modernes Design --- */
         
         body {
-            /* ANGEPASST: Der Pfad zeigt jetzt in den "images" Ordner! */
+            /* Der Pfad zeigt in den "images" Ordner! */
             background-image: url('images/tm7_hintergrund.jpg');
             
             background-size: cover; 
@@ -169,12 +169,15 @@
             margin-top: 20px;
         }
 
+        /* NEU: Angepasstes Styling für die YouTube iframes */
         .video-full {
             width: 100%;
+            max-width: 400px; /* Begrenzt die Breite für hochkante Videos */
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            margin-top: 20px;
-            outline: none;
+            margin: 20px auto 0 auto;
+            display: block;
+            border: none;
         }
 
         .vertical-video-grid {
@@ -188,7 +191,7 @@
             width: 100%;
             border-radius: 10px; 
             box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-            outline: none;
+            border: none;
             transition: transform 0.3s ease; 
         }
 
@@ -323,7 +326,6 @@
                 <p>Herzlich willkommen in meiner Thermomix® Welt! Als deine unabhängige Repräsentantin für Bochum und NRW zeige ich dir mit großer Begeisterung, wie du deinen Küchenalltag komplett auf den Kopf stellst – positiv natürlich! 😉</p>
                 <p>Der brandneue <strong>Thermomix® TM7</strong> ist da und er ist nicht nur ein edler Hingucker, sondern ein echtes Multitalent. Lass uns gemeinsam herausfinden, wie er dir Zeit, Geld und Arbeit beim Kochen spart.</p>
             </div>
-            <!-- ANGEPASST: Der Pfad zeigt in den "images" Ordner -->
             <img src="images/sonja_webseite_comic.png" alt="Foto von Sonja" class="welcome-image">
         </div>
 
@@ -357,18 +359,14 @@
             <h2>Der Thermomix® in Aktion</h2>
             <p>So wunderschön fügt sich der TM7 in sein Umfeld ein:</p>
             
-            <video controls autoplay muted playsinline loop class="video-full">
-                <!-- ANGEPASST: Der Pfad zeigt in den "videos" Ordner -->
-                <source src="videos/video_1.mp4" type="video/mp4">
-                Dein Browser unterstützt dieses Video leider nicht.
-            </video>
+            <!-- HIER MUSS DEINE YOUTUBE ID REIN (ersetze das Wort PLATZHALTER_TM7 an beiden Stellen) -->
+            <iframe class="video-full" src="https://www.youtube.com/embed/i_nTaEFSHbA?autoplay=1&mute=1&loop=1&playlist=i_nTaEFSHbA" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
         </div>
 
         <div class="card center-text" style="text-align: center;">
             <h2>10 Gründe für den Thermomix®</h2>
             <p>Warum der TM7 dein bester Freund in der Küche wird:</p>
             
-            <!-- ANGEPASST -->
             <img src="images/IMAGE_4.jpg" alt="10 Gründe für den Thermomix" class="infographic" style="max-width: 450px; margin: 20px auto; display: block;">
         </div>
 
@@ -376,7 +374,6 @@
             <h2>Der große Modell-Vergleich</h2>
             <p>Du hast noch einen älteren Thermomix und überlegst zu wechseln? Hier siehst du die wichtigsten Fakten auf einen Blick:</p>
             <div class="comparison-grid">
-                <!-- ANGEPASST -->
                 <img src="images/IMAGE_2.jpg" alt="Vergleich TM5 vs TM7" class="infographic" style="margin-top: 0;">
                 <img src="images/IMAGE_3.jpg" alt="Faktencheck TM6 vs TM7" class="infographic" style="margin-top: 0;">
             </div>
@@ -387,19 +384,14 @@
             <p>Sichere dir bis zum <strong>29.03.2026</strong> den TM7 inklusive einem <strong>zweiten Mixtopf</strong>! Schau dir an, wie viel Flexibilität und Zeit dir dieses Paket im Alltag schenkt:</p>
             
             <div class="vertical-video-grid">
-                <!-- ALLE 4 VIDEOS ANGEPASST -->
-                <video controls autoplay muted playsinline loop class="vertical-video">
-                    <source src="videos/video_4.mp4" type="video/mp4">
-                </video>
-                <video controls autoplay muted playsinline loop class="vertical-video">
-                    <source src="videos/video_5.mp4" type="video/mp4">
-                </video>
-                <video controls autoplay muted playsinline loop class="vertical-video">
-                    <source src="videos/video_2.mp4" type="video/mp4">
-                </video>
-                <video controls autoplay muted playsinline loop class="vertical-video">
-                    <source src="videos/video_3.mp4" type="video/mp4">
-                </video>
+                <!-- HIER MÜSSEN DIE 4 WEITEREN YOUTUBE IDs REIN -->
+                <iframe class="vertical-video" src="https://www.youtube.com/embed/w_s5-Mh-Nkg?autoplay=1&mute=1&loop=1&playlist=w_s5-Mh-Nkg" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
+                
+                <iframe class="vertical-video" src="https://www.youtube.com/embed/iovRqUgFm7g?autoplay=1&mute=1&loop=1&playlist=iovRqUgFm7g" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
+                
+                <iframe class="vertical-video" src="https://www.youtube.com/embed/QQCDUEYbsLY?autoplay=1&mute=1&loop=1&playlist=QQCDUEYbsLY" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
+                
+                <iframe class="vertical-video" src="https://www.youtube.com/embed/C4eYL48gLWI?autoplay=1&mute=1&loop=1&playlist=C4eYL48gLWI" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
             </div>
             
             <p style="font-size: 0.8em; color: #555; margin-top: 15px;">
@@ -423,7 +415,6 @@
         <div class="card center-text">
             <h2>Ganz entspannt finanzieren</h2>
             <p>Der Thermomix® TM7 zieht sofort bei dir ein, aber du zahlst ganz bequem. Hier sind die Vorteile unserer Finanzierung:</p>
-            <!-- ANGEPASST -->
             <img src="images/IMAGE_1.jpg" alt="Informationen zur Finanzierung" class="infographic" style="max-width: 600px; margin: 20px auto; display: block;">
         </div>
 
