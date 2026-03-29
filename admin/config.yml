@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "seiten"
+    label: "Webseite bearbeiten"
+    files:
+      - label: "Startseite"
+        name: "startseite"
+        file: "index.html"
+        fields:
+          - {label: "Aktions-Bild", name: "promo_image", widget: "image"}
+          - {label: "Willkommenstext", name: "body", widget: "markdown"}
