@@ -169,10 +169,10 @@
             margin-top: 20px;
         }
 
-        /* NEU: Angepasstes Styling für die YouTube iframes */
+        /* Angepasstes Styling für die YouTube iframes */
         .video-full {
             width: 100%;
-            max-width: 400px; /* Begrenzt die Breite für hochkante Videos */
+            max-width: 400px; 
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             margin: 20px auto 0 auto;
@@ -309,6 +309,10 @@
             text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
             margin-top: 20px;
         }
+
+        /* --- NEU: Verhindert Flackern beim Laden --- */
+        .content-fade { opacity: 0; transition: opacity 0.5s ease; }
+        .loaded .content-fade { opacity: 1; }
     </style>
 </head>
 <body>
@@ -318,15 +322,19 @@
         <p>Deine persönliche Beratung mit Sonja – vor Ort in Bochum und ganz NRW</p>
     </header>
 
-    <div class="container">
+    <!-- NEU: Hier haben wir die Klasse "content-fade" hinzugefügt -->
+    <div class="container content-fade">
         
         <div class="card welcome-card">
             <div class="welcome-text">
                 <h2>Schön, dass du hier bist! Ich bin Sonja.</h2>
-                <p>Herzlich willkommen in meiner Thermomix® Welt! Als deine unabhängige Repräsentantin für Bochum und NRW zeige ich dir mit großer Begeisterung, wie du deinen Küchenalltag komplett auf den Kopf stellst – positiv natürlich! 😉</p>
-                <p>Der brandneue <strong>Thermomix® TM7</strong> ist da und er ist nicht nur ein edler Hingucker, sondern ein echtes Multitalent. Lass uns gemeinsam herausfinden, wie er dir Zeit, Geld und Arbeit beim Kochen spart.</p>
+                
+                <!-- NEU: Diese ID ("txt-willkommen") sagt dem Script, wo der Text hinsoll -->
+                <p id="txt-willkommen">Herzlich willkommen in meiner Thermomix® Welt! Als deine unabhängige Repräsentantin für Bochum und NRW zeige ich dir mit großer Begeisterung, wie du deinen Küchenalltag komplett auf den Kopf stellst – positiv natürlich! 😉</p>
             </div>
-            <img src="images/sonja_webseite_comic.png" alt="Foto von Sonja" class="welcome-image">
+            
+            <!-- NEU: Diese ID ("img-sonja") sagt dem Script, wo das Bild hinsoll -->
+            <img id="img-sonja" src="images/sonja_webseite_comic.png" alt="Foto von Sonja" class="welcome-image">
         </div>
 
         <div class="card">
@@ -359,8 +367,11 @@
             <h2>Der Thermomix® in Aktion</h2>
             <p>So wunderschön fügt sich der TM7 in sein Umfeld ein:</p>
             
-            <!-- HIER MUSS DEINE YOUTUBE ID REIN (ersetze das Wort PLATZHALTER_TM7 an beiden Stellen) -->
-            <iframe class="video-full" src="https://www.youtube.com/embed/i_nTaEFSHbA?autoplay=1&mute=1&loop=1&playlist=i_nTaEFSHbA" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
+            <!-- NEU: Diese ID ("video-container") sagt dem Script, wo das YouTube-Video hinsoll -->
+            <div id="video-container">
+                <!-- Dein altes Video bleibt als Platzhalter hier, falls etwas schiefgeht -->
+                <iframe class="video-full" src="https://www.youtube.com/embed/i_nTaEFSHbA?autoplay=1&mute=1&loop=1&playlist=i_nTaEFSHbA" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
+            </div>
         </div>
 
         <div class="card center-text" style="text-align: center;">
@@ -384,13 +395,9 @@
             <p>Sichere dir bis zum <strong>29.03.2026</strong> den TM7 inklusive einem <strong>zweiten Mixtopf</strong>! Schau dir an, wie viel Flexibilität und Zeit dir dieses Paket im Alltag schenkt:</p>
             
             <div class="vertical-video-grid">
-                <!-- HIER MÜSSEN DIE 4 WEITEREN YOUTUBE IDs REIN -->
                 <iframe class="vertical-video" src="https://www.youtube.com/embed/w_s5-Mh-Nkg?autoplay=1&mute=1&loop=1&playlist=w_s5-Mh-Nkg" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
-                
                 <iframe class="vertical-video" src="https://www.youtube.com/embed/iovRqUgFm7g?autoplay=1&mute=1&loop=1&playlist=iovRqUgFm7g" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
-                
                 <iframe class="vertical-video" src="https://www.youtube.com/embed/QQCDUEYbsLY?autoplay=1&mute=1&loop=1&playlist=QQCDUEYbsLY" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
-                
                 <iframe class="vertical-video" src="https://www.youtube.com/embed/C4eYL48gLWI?autoplay=1&mute=1&loop=1&playlist=C4eYL48gLWI" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
             </div>
             
@@ -449,6 +456,8 @@
                 
                 <p><strong>Verbraucher­streit­beilegung / Universal­schlichtungs­stelle:</strong><br>
                 Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+                
+                <p style="margin-top: 20px;"><a href="/admin/" style="color: #008C8C;">Interner Kunden-Login</a></p>
             </div>
         </div>
 
@@ -459,5 +468,49 @@
         *Dies ist eine private Webseite einer unabhängigen Beraterin. Thermomix®, TM7 und Cookidoo® sind eingetragene Marken der Vorwerk-Gruppe.*</p>
     </footer>
 
+    <!-- ========================================== -->
+    <!-- NEU: DAS GEHIRN (Liest die Daten vom CMS)  -->
+    <!-- ========================================== -->
+    <script>
+        async function loadSiteContent() {
+            try {
+                // Holt die JSON-Datei (der Trick "?t=" verhindert, dass der Browser eine alte Kopie lädt)
+                const response = await fetch('content.json?t=' + Date.now());
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Schreibt den Text in das Feld mit der ID "txt-willkommen"
+                    if (data.willkommenstext) {
+                        document.getElementById('txt-willkommen').innerText = data.willkommenstext;
+                    }
+                    
+                    // Setzt das neue Bild in das Feld mit der ID "img-sonja"
+                    if (data.aktions_bild) {
+                        document.getElementById('img-sonja').src = data.aktions_bild;
+                    }
+                    
+                    // Baut das YouTube-Video mit der neuen ID auf
+                    if (data.youtube_id) {
+                        const videoId = data.youtube_id;
+                        document.getElementById('video-container').innerHTML = `
+                            <iframe class="video-full" 
+                                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}" 
+                                    frameborder="0" allow="autoplay; fullscreen" 
+                                    style="aspect-ratio: 9/16;"></iframe>
+                        `;
+                    }
+                }
+            } catch (error) {
+                console.error("Daten konnten nicht geladen werden, verwende alte Standardtexte:", error);
+            } finally {
+                // WICHTIG: Wenn er fertig ist (egal ob erfolgreich oder Fehler), wird die Seite eingeblendet!
+                document.body.classList.add('loaded');
+            }
+        }
+
+        // Dieses Kommando startet das Gehirn, sobald die Seite geladen wird
+        window.onload = loadSiteContent;
+    </script>
 </body>
 </html>
