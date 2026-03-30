@@ -9,10 +9,11 @@ collections:
   - name: "inhalt"
     label: "Webseite Texte & Medien"
     files:
-      - label: "Startseite Inhalte"
+      - label: "Aktuelle Aktion / News"
         name: "startseite"
         file: "content.json"
         fields:
-          - {label: "Willkommenstext", name: "willkommenstext", widget: "text", hint: "Maximal 500 Zeichen empfohlen."}
-          - {label: "Aktions-Bild (Banner)", name: "aktions_bild", widget: "image"}
-          - {label: "YouTube Video-ID", name: "youtube_id", widget: "string", hint: "Nur der Code nach dem 'v=' (z.B. dQw4w9WgXcQ)"}
+          # NEU: "required: false" macht das Feld freiwillig!
+          - {label: "Aktueller Text / Aktion", name: "willkommenstext", widget: "text", required: false, hint: "Was gibt es Neues?"}
+          - {label: "Zusätzliches Foto", name: "aktions_bild", widget: "image", required: false, hint: "Optional"}
+          - {label: "Zusätzliches YouTube Video-ID", name: "youtube_id", widget: "string", required: false, hint: "Optional. Nur die ID (z.B. dQw4w9WgXcQ)"}
