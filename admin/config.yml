@@ -6,12 +6,13 @@ media_folder: "images"
 public_folder: "/images"
 
 collections:
-  - name: "seiten"
-    label: "Webseite bearbeiten"
+  - name: "inhalt"
+    label: "Webseite Texte & Medien"
     files:
-      - label: "Startseite"
+      - label: "Startseite Inhalte"
         name: "startseite"
-        file: "index.html"
+        file: "content.json"
         fields:
-          - {label: "Aktions-Bild", name: "promo_image", widget: "image"}
-          - {label: "Willkommenstext", name: "body", widget: "markdown"}
+          - {label: "Willkommenstext", name: "willkommenstext", widget: "text"}
+          - {label: "Aktions-Bild (Banner)", name: "aktions_bild", widget: "image"}
+          - {label: "YouTube Video-ID (z.B. dQw4w9WgXcQ)", name: "youtube_id", widget: "string"}
