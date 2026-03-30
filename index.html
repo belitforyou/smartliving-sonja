@@ -487,12 +487,25 @@
                     
                     // Setzt das neue Bild in das Feld mit der ID "img-sonja"
                     if (data.aktions_bild) {
-                        document.getElementById('img-sonja').src = data.aktions_bild;
+                        let imgPfad = data.aktions_bild;
+                        // Repariert den Pfad: Falls das CMS einen Schrägstrich "/" davor setzt, entfernen wir ihn
+                        if (imgPfad.startsWith('/')) {
+                            imgPfad = imgPfad.substring(1);
+                        }
+                        document.getElementById('img-sonja').src = imgPfad;
                     }
                     
                     // Baut das YouTube-Video mit der neuen ID auf
                     if (data.youtube_id) {
-                        const videoId = data.youtube_id;
+                        let videoId = data.youtube_id.trim();
+                        
+                        // Macht das Feld "kugelsicher": Falls der ganze Link eingefügt wurde, holen wir nur die ID raus
+                        if (videoId.includes('v=')) {
+                            videoId = videoId.split('v=')[1].substring(0, 11);
+                        } else if (videoId.includes('youtu.be/')) {
+                            videoId = videoId.split('youtu.be/')[1].substring(0, 11);
+                        }
+
                         document.getElementById('video-container').innerHTML = `
                             <iframe class="video-full" 
                                     src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}" 
