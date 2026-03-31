@@ -64,7 +64,6 @@
         .button { display: inline-block; background: linear-gradient(135deg, #008C8C 0%, #00b3b3 100%); color: white; text-align: center; padding: 16px 35px; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 1.1em; margin: 30px auto 10px auto; box-shadow: 0 10px 20px rgba(0,140,140,0.3); transition: all 0.3s ease;}
         .button:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 25px rgba(0,140,140,0.4); }
 
-        /* NEU: Ein spezielles Design nur für den WhatsApp Button */
         .whatsapp-button {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); 
             box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
@@ -84,8 +83,19 @@
         .content-fade { opacity: 0; transition: opacity 0.5s ease; }
         .loaded .content-fade { opacity: 1; }
 
-        /* Styling für die Aktions-Box */
         .aktions-box { border: 2px dashed #008C8C; background-color: rgba(255, 255, 255, 0.8); }
+
+        /* NEU: Ein wenig Styling, damit der 3D-Viewer auf allen Geräten gut aussieht */
+        model-viewer {
+            width: 100%;
+            height: 400px;
+            background-color: transparent;
+            margin: 20px auto 0 auto;
+            border-radius: 15px;
+            outline: none; /* Entfernt den Rahmen beim Anklicken */
+            cursor: grab; /* Zeigt eine "Greif-Hand" an */
+        }
+        model-viewer:active { cursor: grabbing; }
     </style>
 </head>
 <body>
@@ -138,6 +148,25 @@
             <span class="price-tag">Preis: 1.549,00 €</span>
         </div>
 
+        <!-- ========================================== -->
+        <!-- NEU: DIE 3D-MODELL BOX                     -->
+        <!-- ========================================== -->
+        <div class="card center-text" style="text-align: center;">
+            <h2>Entdecke den TM7 in 3D</h2>
+            <p>Bewege das Modell mit der Maus (oder dem Finger), um es von allen Seiten zu betrachten!</p>
+            
+            <!-- Der 3D Viewer -->
+            <model-viewer 
+                src="thermomix.glb" 
+                alt="Ein 3D-Modell des Thermomix" 
+                auto-rotate 
+                camera-controls 
+                shadow-intensity="1"
+                exposure="1">
+            </model-viewer>
+        </div>
+        <!-- ========================================== -->
+
         <!-- DEIN FESTES HAUPT-VIDEO -->
         <div class="card" style="text-align: center;">
             <h2>Der Thermomix® in Aktion</h2>
@@ -160,16 +189,13 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
         <!-- WECHSELNDE HAUPT-AKTION (Gesteuert über CMS) -->
-        <!-- ========================================== -->
         <div id="cms-hauptaktion-section" class="card center-text" style="display: none; text-align: center;">
             <h2 id="cms-hauptaktion-titel" style="color: #008C8C;"></h2>
             <p id="cms-hauptaktion-text"></p>
             
             <div id="cms-hauptaktion-videos" class="vertical-video-grid"></div>
         </div>
-        <!-- ========================================== -->
 
         <div class="card">
             <h2>Alles drin, was du brauchst</h2>
@@ -183,20 +209,15 @@
             </ul>
         </div>
 
-        <!-- ========================================== -->
-        <!-- DIE WHATSAPP KONTAKT BOX                   -->
-        <!-- ========================================== -->
+        <!-- DIE WHATSAPP KONTAKT BOX -->
         <div class="card center-text" style="text-align: center;">
             <h2>Kontakt schnell und einfach</h2>
             <p>Du hast eine kurze Frage oder möchtest direkt einen Termin vereinbaren?</p>
             
-            <!-- HIER MUSST DU SONJAS NUMMER EINTRAGEN -->
-            <!-- Beispiel: Wenn ihre Nummer 0151 1234567 ist, tippe: 491511234567 -->
             <a href="https://wa.me/4915100000000" target="_blank" class="button whatsapp-button">
                 💬 Kontaktiert mich per WhatsApp
             </a>
         </div>
-        <!-- ========================================== -->
 
         <!-- IMPRESSUM -->
         <div class="card" style="background-color: rgba(255, 255, 255, 0.95); margin-top: 40px;">
@@ -277,7 +298,7 @@
                         newsSection.style.display = "block";
                     }
 
-                    // --- NEU: Check für die große Haupt-Aktion ---
+                    // --- Check für die große Haupt-Aktion ---
                     let hatHauptaktion = false;
                     const hauptSection = document.getElementById('cms-hauptaktion-section');
                     const hauptTitel = document.getElementById('cms-hauptaktion-titel');
@@ -318,7 +339,6 @@
                         hatHauptaktion = true;
                     }
 
-                    // Box nur anzeigen, wenn es auch Inhalt gibt
                     if (hatHauptaktion) {
                         hauptSection.style.display = "block";
                     }
@@ -333,5 +353,9 @@
 
         window.onload = loadSiteContent;
     </script>
+    
+    <!-- NEU: Das Skript (Werkzeug), damit der Browser 3D-Modelle versteht -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
 </body>
 </html>
