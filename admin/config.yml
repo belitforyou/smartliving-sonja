@@ -13,7 +13,15 @@ collections:
         name: "startseite"
         file: "content.json"
         fields:
-          # NEU: "required: false" macht das Feld freiwillig!
+          # --- Die kleine "Aktuelles"-Box oben ---
           - {label: "Aktueller Text / Aktion", name: "willkommenstext", widget: "text", required: false, hint: "Was gibt es Neues?"}
           - {label: "Zusätzliches Foto", name: "aktions_bild", widget: "image", required: false, hint: "Optional"}
           - {label: "Zusätzliches YouTube Video-ID", name: "youtube_id", widget: "string", required: false, hint: "Optional. Nur die ID (z.B. dQw4w9WgXcQ)"}
+          
+          # --- NEU: Die große "Haupt-Aktion" unten ---
+          - {label: "Titel der Haupt-Aktion", name: "hauptaktion_titel", widget: "string", required: false, hint: "z.B. Das exklusive Entspannt-kochen-Paket"}
+          - {label: "Text der Haupt-Aktion", name: "hauptaktion_text", widget: "text", required: false, hint: "Beschreibe das Paket..."}
+          - {label: "Paket Video 1 (ID)", name: "hauptaktion_video1", widget: "string", required: false, hint: "Optional"}
+          - {label: "Paket Video 2 (ID)", name: "hauptaktion_video2", widget: "string", required: false, hint: "Optional"}
+          - {label: "Paket Video 3 (ID)", name: "hauptaktion_video3", widget: "string", required: false, hint: "Optional"}
+          - {label: "Paket Video 4 (ID)", name: "hauptaktion_video4", widget: "string", required: false, hint: "Optional"}
