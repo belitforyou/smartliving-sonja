@@ -1,13 +1,34 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kunden Cockpit</title>
+    <title>Kunden Cockpit - Login</title>
     
+    <!-- ========================================== -->
+    <!-- WICHTIG: Der Türsteher MUSS auch hier stehen -->
+    <!-- ========================================== -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
+    <!-- Das CMS baut sich hier automatisch auf -->
+    
+    <!-- ========================================== -->
+    <!-- FEHLERBEHEBUNG: Das CMS-Skript MUSS im <body> stehen -->
+    <!-- ========================================== -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+    <!-- Optionales Skript: Leitet den Benutzer nach dem Login direkt weiter -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
