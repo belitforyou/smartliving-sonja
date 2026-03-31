@@ -61,7 +61,17 @@
         ul li { padding: 12px 0; padding-left: 35px; position: relative; border-bottom: 1px solid #f0f0f0; }
         ul li::before { content: '✓'; color: white; background-color: #008C8C; position: absolute; left: 0; top: 14px; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
 
-        .button { display: inline-block; background: linear-gradient(135deg, #008C8C 0%, #00b3b3 100%); color: white; text-align: center; padding: 16px 35px; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 1.1em; margin: 30px auto 10px auto; box-shadow: 0 10px 20px rgba(0,140,140,0.3); }
+        .button { display: inline-block; background: linear-gradient(135deg, #008C8C 0%, #00b3b3 100%); color: white; text-align: center; padding: 16px 35px; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 1.1em; margin: 30px auto 10px auto; box-shadow: 0 10px 20px rgba(0,140,140,0.3); transition: all 0.3s ease;}
+        .button:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 15px 25px rgba(0,140,140,0.4); }
+
+        /* NEU: Ein spezielles Design nur für den WhatsApp Button */
+        .whatsapp-button {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); 
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+        .whatsapp-button:hover {
+            box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4);
+        }
 
         @media (max-width: 768px) {
             .welcome-card { flex-direction: column-reverse; text-align: center; }
@@ -74,11 +84,8 @@
         .content-fade { opacity: 0; transition: opacity 0.5s ease; }
         .loaded .content-fade { opacity: 1; }
 
-        /* NEU: Styling für die Aktions-Box */
-        .aktions-box {
-            border: 2px dashed #008C8C;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
+        /* Styling für die Aktions-Box */
+        .aktions-box { border: 2px dashed #008C8C; background-color: rgba(255, 255, 255, 0.8); }
     </style>
 </head>
 <body>
@@ -90,30 +97,22 @@
 
     <div class="container content-fade">
         
-        <!-- DEIN FESTES FUNDAMENT (Bleibt immer unverändert!) -->
         <div class="card welcome-card">
             <div class="welcome-text">
                 <h2>Schön, dass du hier bist! Ich bin Sonja.</h2>
-                <p>Herzlich willkommen in meiner Thermomix® Welt! Als deine unabhängige Repräsentantin für Bochum und NRW zeige ich dir mit großer Begeisterung, wie du deinen Küchenalltag komplett auf den Kopf stellst – positiv natürlich! 😉</p>
+                <p>Herzlich willkommen in meiner Thermomix® Welt! Als deine unabhängige Repräsentantin für Bochum und Umgebung zeige ich dir mit großer Begeisterung, wie du deinen Küchenalltag komplett auf den Kopf stellst – positiv natürlich! 😉</p>
                 <p>Der brandneue <strong>Thermomix® TM7</strong> ist da und er ist nicht nur ein edler Hingucker, sondern ein echtes Multitalent. Lass uns gemeinsam herausfinden, wie er dir Zeit, Geld und Arbeit beim Kochen spart.</p>
             </div>
             <img src="images/sonja_webseite_comic.png" alt="Foto von Sonja" class="welcome-image">
         </div>
 
-        <!-- ========================================== -->
-        <!-- NEU: DIE AKTION-BOX (Wird vom CMS gefüllt) -->
-        <!-- ========================================== -->
+        <!-- DIE AKTION-BOX (Wird lokal aus der content.json gefüllt) -->
         <div id="cms-news-section" class="card aktions-box" style="display: none; text-align: center;">
             <h2>Aktuelles & Neuigkeiten</h2>
             <p id="cms-news-text" style="font-size: 1.1em; font-weight: 600;"></p>
-            
-            <!-- Platzhalter für ein zusätzliches Bild -->
             <img id="cms-news-image" src="" alt="Aktuelles Bild" style="display: none; max-width: 100%; border-radius: 15px; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-            
-            <!-- Platzhalter für ein zusätzliches Video -->
             <div id="cms-news-video" style="display: none; margin-top: 20px;"></div>
         </div>
-        <!-- ========================================== -->
 
         <div class="card">
             <h2>So viel WOW wie noch nie</h2>
@@ -139,7 +138,7 @@
             <span class="price-tag">Preis: 1.549,00 €</span>
         </div>
 
-        <!-- DEIN FESTES HAUPT-VIDEO (Bleibt immer erhalten!) -->
+        <!-- DEIN FESTES HAUPT-VIDEO -->
         <div class="card" style="text-align: center;">
             <h2>Der Thermomix® in Aktion</h2>
             <p>So wunderschön fügt sich der TM7 in sein Umfeld ein:</p>
@@ -161,18 +160,16 @@
             </div>
         </div>
 
-        <div class="card center-text" style="text-align: center;">
-            <h2 style="color: #008C8C;">Das exklusive "Entspannt-kochen-Paket"</h2>
-            <p>Sichere dir bis zum <strong>29.03.2026</strong> den TM7 inklusive einem <strong>zweiten Mixtopf</strong>! Schau dir an, wie viel Flexibilität und Zeit dir dieses Paket im Alltag schenkt:</p>
+        <!-- ========================================== -->
+        <!-- WECHSELNDE HAUPT-AKTION (Gesteuert über CMS) -->
+        <!-- ========================================== -->
+        <div id="cms-hauptaktion-section" class="card center-text" style="display: none; text-align: center;">
+            <h2 id="cms-hauptaktion-titel" style="color: #008C8C;"></h2>
+            <p id="cms-hauptaktion-text"></p>
             
-            <!-- DEIN FESTES VIDEO-GRID (Bleibt immer erhalten!) -->
-            <div class="vertical-video-grid">
-                <iframe class="vertical-video" src="https://www.youtube.com/embed/w_s5-Mh-Nkg?autoplay=1&mute=1&loop=1&playlist=w_s5-Mh-Nkg" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
-                <iframe class="vertical-video" src="https://www.youtube.com/embed/iovRqUgFm7g?autoplay=1&mute=1&loop=1&playlist=iovRqUgFm7g" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
-                <iframe class="vertical-video" src="https://www.youtube.com/embed/QQCDUEYbsLY?autoplay=1&mute=1&loop=1&playlist=QQCDUEYbsLY" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
-                <iframe class="vertical-video" src="https://www.youtube.com/embed/C4eYL48gLWI?autoplay=1&mute=1&loop=1&playlist=C4eYL48gLWI" allow="autoplay; fullscreen" style="aspect-ratio: 9/16;"></iframe>
-            </div>
+            <div id="cms-hauptaktion-videos" class="vertical-video-grid"></div>
         </div>
+        <!-- ========================================== -->
 
         <div class="card">
             <h2>Alles drin, was du brauchst</h2>
@@ -186,24 +183,53 @@
             </ul>
         </div>
 
+        <!-- ========================================== -->
+        <!-- DIE WHATSAPP KONTAKT BOX                   -->
+        <!-- ========================================== -->
         <div class="card center-text" style="text-align: center;">
-            <h2>Lust, den TM7 live zu testen?</h2>
-            <a href="mailto:deine.email@adresse.de?subject=Interesse am Thermomix TM7" class="button">Jetzt Erlebniskochen anfragen</a>
+            <h2>Kontakt schnell und einfach</h2>
+            <p>Du hast eine kurze Frage oder möchtest direkt einen Termin vereinbaren?</p>
+            
+            <!-- HIER MUSST DU SONJAS NUMMER EINTRAGEN -->
+            <!-- Beispiel: Wenn ihre Nummer 0151 1234567 ist, tippe: 491511234567 -->
+            <a href="https://wa.me/4915100000000" target="_blank" class="button whatsapp-button">
+                💬 Kontaktiert mich per WhatsApp
+            </a>
         </div>
+        <!-- ========================================== -->
 
+        <!-- IMPRESSUM -->
         <div class="card" style="background-color: rgba(255, 255, 255, 0.95); margin-top: 40px;">
             <h2 style="font-size: 1.5em; text-align: center; color: #2c3e50;">Impressum</h2>
             <div style="font-size: 0.9em; color: #555; max-width: 600px; margin: 0 auto;">
-                <p><strong>Angaben gemäß § 5 TMG:</strong><br>Sonja Attia<br>Unabhängige Thermomix® Repräsentantin</p>
+                
+                <p><strong>Angaben gemäß § 5 TMG:</strong><br>
+                Sonja Attia<br>
+                Unabhängige Thermomix® Repräsentantin<br>
+                Sonnenleite 12<br>
+                44892 Bochum</p>
+                
+                <p><strong>Kontakt:</strong><br>
+                Telefon: [HIER BITTE EURE TELEFONNUMMER EINTRAGEN]<br>
+                E-Mail: deine.email@adresse.de</p>
+                
+                <p><strong>Umsatzsteuer-ID:</strong><br>
+                [Falls Sonja eine hat, bitte hier eintragen. Wenn nicht, diese zwei Zeilen einfach löschen]</p>
+                
+                <p><strong>EU-Streitschlichtung:</strong><br>
+                Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" style="color: #008C8C;">https://ec.europa.eu/consumers/odr/</a>.<br>
+                Unsere E-Mail-Adresse finden Sie oben im Impressum.</p>
+                
+                <p><strong>Verbraucher­streit­beilegung / Universal­schlichtungs­stelle:</strong><br>
+                Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+
                 <p style="margin-top: 20px;"><a href="/admin/" style="color: #008C8C; text-decoration: none;">[ Interner Login ]</a></p>
             </div>
         </div>
 
     </div>
 
-    <!-- ========================================== -->
-    <!-- DAS GEHIRN FÜR DIE AKTION-BOX              -->
-    <!-- ========================================== -->
+    <!-- DAS GEHIRN FÜR DIE AKTION-BOX -->
     <script>
         async function loadSiteContent() {
             try {
@@ -212,7 +238,6 @@
                 if (response.ok) {
                     const data = await response.json();
                     
-                    // Wir merken uns, ob Sonja überhaupt etwas eingegeben hat
                     let hatInhalt = false;
                     
                     const newsSection = document.getElementById('cms-news-section');
@@ -220,25 +245,21 @@
                     const newsImage = document.getElementById('cms-news-image');
                     const newsVideo = document.getElementById('cms-news-video');
                     
-                    // 1. Check: Gibt es einen Text?
                     if (data.willkommenstext && data.willkommenstext.trim() !== "") {
                         newsText.innerText = data.willkommenstext;
                         hatInhalt = true;
                     }
                     
-                    // 2. Check: Wurde ein Bild hochgeladen?
                     if (data.aktions_bild && data.aktions_bild.trim() !== "") {
                         let imgPfad = data.aktions_bild;
                         if (imgPfad.startsWith('/')) { imgPfad = imgPfad.substring(1); }
                         newsImage.src = imgPfad;
-                        newsImage.style.display = "inline-block"; // Bild sichtbar machen
+                        newsImage.style.display = "inline-block"; 
                         hatInhalt = true;
                     }
                     
-                    // 3. Check: Wurde ein Video eingetragen?
                     if (data.youtube_id && data.youtube_id.trim() !== "") {
                         let videoId = data.youtube_id.trim();
-                        // Filtert automatische ganze Links heraus
                         if (videoId.includes('v=')) { videoId = videoId.split('v=')[1].substring(0, 11); }
                         else if (videoId.includes('youtu.be/')) { videoId = videoId.split('youtu.be/')[1].substring(0, 11); }
 
@@ -248,19 +269,64 @@
                                     frameborder="0" allow="autoplay; fullscreen" 
                                     style="aspect-ratio: 9/16;"></iframe>
                         `;
-                        newsVideo.style.display = "block"; // Video sichtbar machen
+                        newsVideo.style.display = "block"; 
                         hatInhalt = true;
                     }
 
-                    // WICHTIG: Wenn mindestens eins von den dreien da ist, zeigen wir die ganze Box!
                     if (hatInhalt) {
                         newsSection.style.display = "block";
                     }
+
+                    // --- NEU: Check für die große Haupt-Aktion ---
+                    let hatHauptaktion = false;
+                    const hauptSection = document.getElementById('cms-hauptaktion-section');
+                    const hauptTitel = document.getElementById('cms-hauptaktion-titel');
+                    const hauptText = document.getElementById('cms-hauptaktion-text');
+                    const hauptVideos = document.getElementById('cms-hauptaktion-videos');
+
+                    if (data.hauptaktion_titel && data.hauptaktion_titel.trim() !== "") {
+                        hauptTitel.innerText = data.hauptaktion_titel;
+                        hatHauptaktion = true;
+                    }
+                    
+                    if (data.hauptaktion_text && data.hauptaktion_text.trim() !== "") {
+                        hauptText.innerHTML = data.hauptaktion_text; 
+                        hatHauptaktion = true;
+                    }
+
+                    // Videos sammeln und einbauen (Schleife für bis zu 4 Videos)
+                    let videoHtml = "";
+                    const videoIds = [data.hauptaktion_video1, data.hauptaktion_video2, data.hauptaktion_video3, data.hauptaktion_video4];
+                    
+                    videoIds.forEach(vid => {
+                        if (vid && vid.trim() !== "") {
+                            let vId = vid.trim();
+                            if (vId.includes('v=')) { vId = vId.split('v=')[1].substring(0, 11); }
+                            else if (vId.includes('youtu.be/')) { vId = vId.split('youtu.be/')[1].substring(0, 11); }
+
+                            videoHtml += `
+                                <iframe class="vertical-video" 
+                                        src="https://www.youtube.com/embed/${vId}?autoplay=1&mute=1&loop=1&playlist=${vId}" 
+                                        allow="autoplay; fullscreen" 
+                                        style="aspect-ratio: 9/16;"></iframe>
+                            `;
+                        }
+                    });
+
+                    if (videoHtml !== "") {
+                        hauptVideos.innerHTML = videoHtml;
+                        hatHauptaktion = true;
+                    }
+
+                    // Box nur anzeigen, wenn es auch Inhalt gibt
+                    if (hatHauptaktion) {
+                        hauptSection.style.display = "block";
+                    }
+
                 }
             } catch (error) {
                 console.log("Keine Neuigkeiten gefunden, Aktions-Box bleibt versteckt.");
             } finally {
-                // Seite einblenden
                 document.body.classList.add('loaded');
             }
         }
