@@ -6,7 +6,7 @@
     <title>Sonja - Deine Thermomix® TM7 Beraterin</title>
     
     <!-- ========================================== -->
-    <!-- NEU: Der Netlify Identity Türsteher        -->
+    <!-- Der Netlify Identity Türsteher             -->
     <!-- Nimmt VIP-Tickets (Einladungs-Links) an    -->
     <!-- ========================================== -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -91,7 +91,7 @@
 
         .aktions-box { border: 2px dashed #008C8C; background-color: rgba(255, 255, 255, 0.8); }
 
-        /* NEU: Ein wenig Styling, damit der 3D-Viewer auf allen Geräten gut aussieht */
+        /* Ein wenig Styling, damit der 3D-Viewer auf allen Geräten gut aussieht */
         model-viewer {
             width: 100%;
             height: 400px;
@@ -161,7 +161,7 @@
             <h2>Entdecke den TM7 in 3D</h2>
             <p>Bewege das Modell mit der Maus (oder dem Finger), um es von allen Seiten zu betrachten!</p>
             
-            <!-- Der 3D Viewer (Pfad ist jetzt wieder auf deine lokale Datei eingestellt) -->
+            <!-- Der 3D Viewer (Pfad ist jetzt wieder auf deine lokale Datei im GitHub-Tresor eingestellt) -->
             <model-viewer 
                 src="thermomix.glb" 
                 alt="Ein 3D-Modell des Thermomix" 
@@ -220,6 +220,7 @@
             <h2>Kontakt schnell und einfach</h2>
             <p>Du hast eine kurze Frage oder möchtest direkt einen Termin vereinbaren?</p>
             
+            <!-- Verknüpft mit Sonjas neuer Nummer -->
             <a href="https://wa.me/4915567299047" target="_blank" class="button whatsapp-button">
                 💬 Kontaktiert mich per WhatsApp
             </a>
@@ -247,7 +248,8 @@
                 <p><strong>Verbraucher­streit­beilegung / Universal­schlichtungs­stelle:</strong><br>
                 Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
-                <p style="margin-top: 20px;"><a href="#" onclick="window.netlifyIdentity.open('login'); return false;" style="color: #008C8C; text-decoration: none;">[ Interner Login ]</a></p>
+                <!-- NEU: Der Link ruft jetzt erst die Funktion auf, wenn man klickt -->
+                <p style="margin-top: 20px;"><a href="#" onclick="starteLogin(); return false;" style="color: #008C8C; text-decoration: none;">[ Interner Login ]</a></p>
             </div>
         </div>
 
@@ -357,15 +359,21 @@
         window.onload = loadSiteContent;
     </script>
     
-    <!-- NEU: Das Skript (Werkzeug), damit der Browser 3D-Modelle versteht -->
+    <!-- Das Skript (Werkzeug), damit der Browser 3D-Modelle versteht -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
-    <!-- NEU: Der Fahrstuhl-Trick für den internen Login -->
+    <!-- NEU: Der verbesserte Fahrstuhl-Trick -->
     <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("login", () => {
-                document.location.href = "/admin/";
-            });
+        function starteLogin() {
+            if (window.netlifyIdentity) {
+                // Das Login-Fenster öffnen
+                window.netlifyIdentity.open('login');
+                
+                // NUR WENN man hier klickt, wird der Fahrstuhl scharf geschaltet
+                window.netlifyIdentity.on("login", () => {
+                    document.location.href = "/admin/";
+                });
+            }
         }
     </script>
 
