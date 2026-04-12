@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonja - Deine Thermomix® TM7 Beraterin</title>
     
-    <!-- Der Netlify Identity Türsteher -->
+    <!-- ========================================== -->
+    <!-- NEU: Der Netlify Identity Türsteher        -->
+    <!-- Nimmt VIP-Tickets (Einladungs-Links) an    -->
+    <!-- ========================================== -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -88,14 +91,15 @@
 
         .aktions-box { border: 2px dashed #008C8C; background-color: rgba(255, 255, 255, 0.8); }
 
+        /* NEU: Ein wenig Styling, damit der 3D-Viewer auf allen Geräten gut aussieht */
         model-viewer {
             width: 100%;
             height: 400px;
             background-color: transparent;
             margin: 20px auto 0 auto;
             border-radius: 15px;
-            outline: none; 
-            cursor: grab; 
+            outline: none; /* Entfernt den Rahmen beim Anklicken */
+            cursor: grab; /* Zeigt eine "Greif-Hand" an */
         }
         model-viewer:active { cursor: grabbing; }
     </style>
@@ -118,6 +122,7 @@
             <img src="images/sonja_webseite_comic.png" alt="Foto von Sonja" class="welcome-image">
         </div>
 
+        <!-- DIE AKTION-BOX (Wird lokal aus der content.json gefüllt) -->
         <div id="cms-news-section" class="card aktions-box" style="display: none; text-align: center;">
             <h2>Aktuelles & Neuigkeiten</h2>
             <p id="cms-news-text" style="font-size: 1.1em; font-weight: 600;"></p>
@@ -149,10 +154,14 @@
             <span class="price-tag">Preis: 1.549,00 €</span>
         </div>
 
+        <!-- ========================================== -->
+        <!-- DIE 3D-MODELL BOX                          -->
+        <!-- ========================================== -->
         <div class="card center-text" style="text-align: center;">
             <h2>Entdecke den TM7 in 3D</h2>
             <p>Bewege das Modell mit der Maus (oder dem Finger), um es von allen Seiten zu betrachten!</p>
             
+            <!-- Der 3D Viewer (Pfad ist jetzt wieder auf deine lokale Datei eingestellt) -->
             <model-viewer 
                 src="thermomix.glb" 
                 alt="Ein 3D-Modell des Thermomix" 
@@ -162,7 +171,9 @@
                 exposure="1">
             </model-viewer>
         </div>
+        <!-- ========================================== -->
 
+        <!-- DEIN FESTES HAUPT-VIDEO -->
         <div class="card" style="text-align: center;">
             <h2>Der Thermomix® in Aktion</h2>
             <p>So wunderschön fügt sich der TM7 in sein Umfeld ein:</p>
@@ -184,9 +195,11 @@
             </div>
         </div>
 
+        <!-- WECHSELNDE HAUPT-AKTION (Gesteuert über CMS) -->
         <div id="cms-hauptaktion-section" class="card center-text" style="display: none; text-align: center;">
             <h2 id="cms-hauptaktion-titel" style="color: #008C8C;"></h2>
             <p id="cms-hauptaktion-text"></p>
+            
             <div id="cms-hauptaktion-videos" class="vertical-video-grid"></div>
         </div>
 
@@ -202,11 +215,12 @@
             </ul>
         </div>
 
+        <!-- DIE WHATSAPP KONTAKT BOX -->
         <div class="card center-text" style="text-align: center;">
             <h2>Kontakt schnell und einfach</h2>
             <p>Du hast eine kurze Frage oder möchtest direkt einen Termin vereinbaren?</p>
             
-            <a href="https://wa.me/4915100000000" target="_blank" class="button whatsapp-button">
+            <a href="https://wa.me/4915567299047" target="_blank" class="button whatsapp-button">
                 💬 Kontaktiert mich per WhatsApp
             </a>
         </div>
@@ -223,11 +237,8 @@
                 44892 Bochum</p>
                 
                 <p><strong>Kontakt:</strong><br>
-                Telefon: [HIER BITTE EURE TELEFONNUMMER EINTRAGEN]<br>
-                E-Mail: deine.email@adresse.de</p>
-                
-                <p><strong>Umsatzsteuer-ID:</strong><br>
-                [Falls Sonja eine hat, bitte hier eintragen. Wenn nicht, diese zwei Zeilen einfach löschen]</p>
+                Telefon: 015567-299047<br>
+                E-Mail: <a href="mailto:info@smartliving-sonja.de" style="color: #008C8C; text-decoration: none;">info@smartliving-sonja.de</a></p>
                 
                 <p><strong>EU-Streitschlichtung:</strong><br>
                 Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" style="color: #008C8C;">https://ec.europa.eu/consumers/odr/</a>.<br>
@@ -236,17 +247,13 @@
                 <p><strong>Verbraucher­streit­beilegung / Universal­schlichtungs­stelle:</strong><br>
                 Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
-                <!-- ========================================== -->
-                <!-- NEU: Der Zauber-Knopf für den Login        -->
-                <!-- ========================================== -->
-                <p style="margin-top: 20px;">
-                    <a href="#" onclick="window.netlifyIdentity.open('login'); return false;" style="color: #008C8C; text-decoration: none;">[ Interner Login ]</a>
-                </p>
+                <p style="margin-top: 20px;"><a href="#" onclick="window.netlifyIdentity.open('login'); return false;" style="color: #008C8C; text-decoration: none;">[ Interner Login ]</a></p>
             </div>
         </div>
 
     </div>
 
+    <!-- DAS GEHIRN FÜR DIE AKTION-BOX -->
     <script>
         async function loadSiteContent() {
             try {
@@ -294,6 +301,7 @@
                         newsSection.style.display = "block";
                     }
 
+                    // --- Check für die große Haupt-Aktion ---
                     let hatHauptaktion = false;
                     const hauptSection = document.getElementById('cms-hauptaktion-section');
                     const hauptTitel = document.getElementById('cms-hauptaktion-titel');
@@ -310,6 +318,7 @@
                         hatHauptaktion = true;
                     }
 
+                    // Videos sammeln und einbauen (Schleife für bis zu 4 Videos)
                     let videoHtml = "";
                     const videoIds = [data.hauptaktion_video1, data.hauptaktion_video2, data.hauptaktion_video3, data.hauptaktion_video4];
                     
@@ -348,12 +357,10 @@
         window.onload = loadSiteContent;
     </script>
     
+    <!-- NEU: Das Skript (Werkzeug), damit der Browser 3D-Modelle versteht -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
-    <!-- ========================================== -->
-    <!-- NEU: Die automatische Fahrstuhl-Fahrt      -->
-    <!-- Wenn erfolgreich eingeloggt -> ab zu /admin-->
-    <!-- ========================================== -->
+    <!-- NEU: Der Fahrstuhl-Trick für den internen Login -->
     <script>
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("login", () => {
