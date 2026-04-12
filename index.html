@@ -161,7 +161,6 @@
             <h2>Entdecke den TM7 in 3D</h2>
             <p>Bewege das Modell mit der Maus (oder dem Finger), um es von allen Seiten zu betrachten!</p>
             
-            <!-- Der 3D Viewer (Pfad ist jetzt wieder auf deine lokale Datei im GitHub-Tresor eingestellt) -->
             <model-viewer 
                 src="thermomix.glb" 
                 alt="Ein 3D-Modell des Thermomix" 
@@ -220,7 +219,6 @@
             <h2>Kontakt schnell und einfach</h2>
             <p>Du hast eine kurze Frage oder möchtest direkt einen Termin vereinbaren?</p>
             
-            <!-- Verknüpft mit Sonjas neuer Nummer -->
             <a href="https://wa.me/4915567299047" target="_blank" class="button whatsapp-button">
                 💬 Kontaktiert mich per WhatsApp
             </a>
@@ -248,7 +246,6 @@
                 <p><strong>Verbraucher­streit­beilegung / Universal­schlichtungs­stelle:</strong><br>
                 Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
-                <!-- NEU: Der Link ruft jetzt erst die Funktion auf, wenn man klickt -->
                 <p style="margin-top: 20px;"><a href="#" onclick="starteLogin(); return false;" style="color: #008C8C; text-decoration: none;">[ Interner Login ]</a></p>
             </div>
         </div>
@@ -359,17 +356,23 @@
         window.onload = loadSiteContent;
     </script>
     
-    <!-- Das Skript (Werkzeug), damit der Browser 3D-Modelle versteht -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
-    <!-- NEU: Der verbesserte Fahrstuhl-Trick -->
+    <!-- NEU: Der verbesserte Fahrstuhl-Trick (inklusive Logout-Erkennung) -->
     <script>
+        // Lausche immer darauf, ob sich jemand ausloggt (Logout)
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("logout", () => {
+                // Bei Logout lade die Seite neu, damit man sicher ausgeloggt bleibt
+                document.location.reload(); 
+            });
+        }
+
         function starteLogin() {
             if (window.netlifyIdentity) {
-                // Das Login-Fenster öffnen
                 window.netlifyIdentity.open('login');
                 
-                // NUR WENN man hier klickt, wird der Fahrstuhl scharf geschaltet
+                // NUR WENN man hier klickt, fährt der Fahrstuhl nach dem Login in den Admin-Bereich
                 window.netlifyIdentity.on("login", () => {
                     document.location.href = "/admin/";
                 });
