@@ -1,34 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="de">
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kunden Cockpit - Login</title>
-    
-    <!-- ========================================== -->
-    <!-- WICHTIG: Der Türsteher MUSS auch hier stehen -->
-    <!-- ========================================== -->
+    <title>Admin-Bereich - Sonja</title>
+    <!-- Der Türsteher für den Admin-Bereich -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  </head>
-  <body>
-    <!-- Das CMS baut sich hier automatisch auf -->
-    
-    <!-- ========================================== -->
-    <!-- FEHLERBEHEBUNG: Das CMS-Skript MUSS im <body> stehen -->
-    <!-- ========================================== -->
+</head>
+<body>
+    <!-- Das eigentliche CMS (Die Bearbeitungs-Oberfläche) -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-
-    <!-- Optionales Skript: Leitet den Benutzer nach dem Login direkt weiter -->
+    
+    <!-- NEU: Der Fahrstuhl zurück nach unten (Logout-Weiterleitung) -->
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("logout", () => {
+                // Sobald Logout geklickt wird, fahre sofort zurück zur Hauptseite ("/")
+                document.location.href = "/";
             });
-          }
-        });
-      }
+        }
     </script>
-  </body>
+</body>
 </html>
